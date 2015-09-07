@@ -143,7 +143,7 @@ public class EstadoJarros implements Estado {
         
         // chama busca em profundidade
         System.out.println("busca em profundidade");
-        n = new BuscaProfundidade(15).busca(inicial);
+        n = new BuscaProfundidade().busca(inicial);
         if (n == null) {
             System.out.println("sem solucao!");
         } else {
