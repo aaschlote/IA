@@ -4,12 +4,12 @@ public class ContainerP {
 
 	private String dsTipo;
 	private int nrPorto;
-	private String dsAnterior;
+	private String dsIdentificacao;
 	
-	public ContainerP(String dsTipo, int nrPorto, String dsAnterior) {
+	public ContainerP(String dsTipo, int nrPorto, String dsIdentificacao) {
 		this.dsTipo = dsTipo;
 		this.nrPorto = nrPorto;
-		this.dsAnterior = dsAnterior;
+		this.dsIdentificacao = dsIdentificacao;
 	}
 	
 	public String getDsTipo() {
@@ -20,12 +20,12 @@ public class ContainerP {
 		return nrPorto;
 	}
 	
-	public void setDsAnterior(String dsAnterior) {
-		this.dsAnterior = dsAnterior;
+	public void setDsAnterior(String dsIdentificacao) {
+		this.dsIdentificacao = dsIdentificacao;
 	}
 	
-	public String getDsAnterior() {
-		return dsAnterior;
+	public String getDsIdentificacao() {
+		return dsIdentificacao;
 	}
 
 	
