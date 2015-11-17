@@ -4,33 +4,28 @@ import java.sql.Date;
 
 public class OcorrenciasPoliciais {
 	
-	private String dsOcorrencia;
+	private String dsFato;
 	private String dsBairro;
-	private Date dtOcorrencia;
-	private String dsOcorrenciaInteira;
+	private String dsDtOcorrencia;
 	private String dsHorario;
 	
-	public OcorrenciasPoliciais(String dsOcorrencia, String dsBairro,String dsOcorrenciaInteira,String dsHorario) {
-		this.dsOcorrencia = dsOcorrencia;
+	public OcorrenciasPoliciais(String dsFato, String dsBairro,String dsHorario, String dsDtOcorrencia) {
+		this.dsFato = dsFato;
 		this.dsBairro = dsBairro;
-		this.dsOcorrenciaInteira = dsOcorrenciaInteira;
 		this.dsHorario 		= dsHorario;
+		this.dsDtOcorrencia = dsDtOcorrencia;
 	}
 
-	public String getDsOcorrencia() {
-		return dsOcorrencia;
+	public String getDsFato() {
+		return dsFato;
 	}
 
 	public String getDsBairro() {
 		return dsBairro;
 	}
 
-	public Date getDtOcorrencia() {
-		return dtOcorrencia;
-	}
-
-	public String getDsOcorrenciaInteira() {
-		return dsOcorrenciaInteira;
+	public String dsDtOcorrencia() {
+		return dsDtOcorrencia;
 	}
 
 	public String getDsHorario() {
