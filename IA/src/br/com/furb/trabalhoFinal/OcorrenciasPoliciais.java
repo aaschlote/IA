@@ -32,6 +32,23 @@ public class OcorrenciasPoliciais {
 		return dsHorario;
 	}
 	
+	public void processar(){
+		if	(!dsHorario.equalsIgnoreCase("")){
+			String dsHorarioAux = dsHorario.substring(dsHorario.indexOf("Horário:")+8);
+			
+			if	((dsHorarioAux.indexOf(":")) == 0){
+				dsHorarioAux = dsHorarioAux.substring(0,1)+":"+dsHorarioAux.substring(2, 3);
+			}
+			
+			dsHorario = dsHorarioAux;
+		}
+		
+		if	(!dsFato.equalsIgnoreCase("")){
+			String dsBairroAux = dsBairro.substring(dsBairro.indexOf("Bairro:")+7);
+			dsBairro = dsBairroAux; 
+		}
+		
+	}
 	
 
 }

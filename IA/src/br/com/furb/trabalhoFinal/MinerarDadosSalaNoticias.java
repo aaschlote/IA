@@ -55,7 +55,8 @@ public class MinerarDadosSalaNoticias {
 		
 		
 		for (OcorrenciasPoliciais ocorrencias : listaOcorrenciasPolic){
-			System.out.println(ocorrencias.getDsFato());
+			ocorrencias.processar();
+			System.out.println(ocorrencias.getDsHorario() + "=" + ocorrencias.getDsBairro());
 		}
 		
 	}
