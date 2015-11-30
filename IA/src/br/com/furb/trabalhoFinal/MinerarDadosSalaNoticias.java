@@ -1,5 +1,7 @@
 package br.com.furb.trabalhoFinal;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
@@ -16,53 +18,76 @@ public class MinerarDadosSalaNoticias {
 	
 	public void extrair() {
 		try {
-			Document document = Jsoup.connect("http://www.saladenoticias.net/?s=atividade%20operacionais&submit=Pesquisar").get();
+			Document document = Jsoup.connect("http://www.saladenoticias.net/?s=atividade%20operacionais&submit=Pesquisar").timeout(10*1000).get();
 			Elements searchResults = document.select(".post > h2 > a");
 			for (Element result : searchResults) {
 	              String link = result.attr("href");
 	              listaString.add(link);
-	              Thread.sleep(2000);
 			}
 			
 			for (int i = 2; i <= qtPages; i++){
-				System.out.println("http://www.saladenoticias.net/?s=atividade+operacionais&submit=Pesquisar&paged="+i);
-				Document documentSub = Jsoup.connect("http://www.saladenoticias.net/?s=atividade+operacionais&submit=Pesquisar&paged="+i).get();
+				Document documentSub = Jsoup.connect("http://www.saladenoticias.net/?s=atividade+operacionais&submit=Pesquisar&paged="+i).timeout(10*1000).get();
 				Elements searchResultsSub = documentSub.select(".post > h2 > a");
 				for (Element resultSub : searchResultsSub) {
 		              String link = resultSub.attr("href");
 		              listaString.add(link);
-		              Thread.sleep(2000);
+		              System.out.println(link);
 				}
 			}
+			
 		} catch (SocketTimeoutException s){
-			System.out.println("QUANTIDADE DE LINKS " + listaString.size());
+			System.out.println(s.getMessage());
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
+		}finally{
+			System.out.println("QUANTIDADE DE LINKS " + listaString.size());
 		}
 		
 		try {
-			Thread.sleep(10000);
-			
 			for (String dsLink : listaString){
 				extraiarOcorrencias(dsLink);
-				Thread.sleep(2000);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			System.out.println(e.getMessage());
+		}finally{
+			System.out.println("QUANTIDADES DE FATOS EXTRAÍDOS " + listaOcorrenciasPolic.size());
+		}
+		
+		try {
+			
+			File arquivo = new File("DADOS_MON.arff");
+			
+			if	(arquivo.exists()){
+				arquivo.delete();
+			}
+			arquivo.createNewFile();
+			
+			FileWriter writter = new FileWriter(arquivo);
+			insereCabecalhoArq(writter);
+			
+			for (OcorrenciasPoliciais ocorrencias : listaOcorrenciasPolic){
+				ocorrencias.processar();
+				writter.write(	ocorrencias.getAcao()[0] + ","+
+								ocorrencias.getAcao()[1] + ","+
+								ocorrencias.getAcao()[2] + ","+
+								ocorrencias.getDsBairro()+ "\n");
+			}
+			
+			writter.close();
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			
 		}
 		
 		
-		for (OcorrenciasPoliciais ocorrencias : listaOcorrenciasPolic){
-			ocorrencias.processar();
-			System.out.println(ocorrencias.getDsHorario() + "=" + ocorrencias.getDsBairro());
-		}
 		
 	}
 	
 	private void extraiarOcorrencias(String dsLink) throws Exception{
-		Document document = Jsoup.connect(dsLink).get();
+		Document document = Jsoup.connect(dsLink).timeout(10*1000).get();
 		Elements searchResults = document.select(".post-entry > p");
 		Elements searchDtOcorrencoa = document.select(".heading-date");
 		String dsData = searchDtOcorrencoa.text();
@@ -153,6 +178,16 @@ public class MinerarDadosSalaNoticias {
 		return !dsHorario.equalsIgnoreCase("") &&
 				!dsLocal.equalsIgnoreCase("") &&
 				!dsFato.equalsIgnoreCase("");
+	}
+	
+	private void insereCabecalhoArq(FileWriter writter) throws Exception{
+		writter.write("@relation spambase \n");
+		writter.write("% spam, non-spam classe \n");
+		writter.write("@attribute acao_policial {foi,auxili,atend,prend,apreend,efetu,registr,abord,nao-identifi} \n");
+		writter.write("@attribute crime_policial {furt,assalt,roub,perturb,traf,agred,pris,prisa,arromb,homicidi,poss,nao-identifi} \n");
+		writter.write("@attribute objeto_policial {motociclet,veicul,carr,mot,cas,caminha,contain,residenc,estabelec,consulto,empr,sala,pad,biciclet,imovel,crech,bar,loj,nao-identifi} \n");
+		writter.write("@attribute bairro string \n ");
+		writter.write("@data \n");
 	}
 	
 

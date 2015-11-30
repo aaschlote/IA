@@ -4,5 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jr7"/>
 	<classpathentry kind="lib" path="C:/Users/Alex/Downloads/buscaJava.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Alex/git/IA/IA/src/jsoup-1.7.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alex/Downloads/lucene-5.3.1/core/lucene-core-5.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alex/git/IA/IA/src/PTStemmer_v2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
