@@ -70,8 +70,7 @@ public class MinerarDadosSalaNoticias {
 				ocorrencias.processar();
 				writter.write(	ocorrencias.getAcao()[0] + ","+
 								ocorrencias.getAcao()[1] + ","+
-								ocorrencias.getAcao()[2] + ","+
-								ocorrencias.getDsBairro()+ "\n");
+								ocorrencias.getAcao()[2] + "\n");
 			}
 			
 			writter.close();
@@ -186,7 +185,6 @@ public class MinerarDadosSalaNoticias {
 		writter.write("@attribute acao_policial {foi,auxili,atend,prend,apreend,efetu,registr,abord,nao-identifi} \n");
 		writter.write("@attribute crime_policial {furt,assalt,roub,perturb,traf,agred,pris,prisa,arromb,homicidi,poss,nao-identifi} \n");
 		writter.write("@attribute objeto_policial {motociclet,veicul,carr,mot,cas,caminha,contain,residenc,estabelec,consulto,empr,sala,pad,biciclet,imovel,crech,bar,loj,nao-identifi} \n");
-		writter.write("@attribute bairro string \n ");
 		writter.write("@data \n");
 	}
 	

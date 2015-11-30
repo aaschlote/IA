@@ -12,6 +12,7 @@ public class OcorrenciasPoliciais {
 	private WordTokenizer tokenizer = new WordTokenizer();
 	private String[] acao = {"nao-identifi","nao-identifi","nao-identifi"};
 	private PeriodoOcorrencia periodo;
+	private GravidadeOcorr gravidadeOcorr = GravidadeOcorr.INEXISTENTE;
 	
 	public OcorrenciasPoliciais(String dsFato, String dsBairro,String dsHorario, String dsDtOcorrencia) {
 		this.dsFato = dsFato;
@@ -20,22 +21,6 @@ public class OcorrenciasPoliciais {
 		this.dsDtOcorrencia = dsDtOcorrencia;
 	}
 
-	public String getDsFato() {
-		return dsFato;
-	}
-
-	public String getDsBairro() {
-		return dsBairro;
-	}
-
-	public String dsDtOcorrencia() {
-		return dsDtOcorrencia;
-	}
-
-	public String getDsHorario() {
-		return dsHorario;
-	}
-	
 	public void processar() throws Exception{
 		if	(!dsHorario.equalsIgnoreCase("")){
 			String dsHorarioAux = dsHorario.substring(dsHorario.indexOf("Horário:")+8);
@@ -125,16 +110,10 @@ public class OcorrenciasPoliciais {
 			
 		}
 		
+		definirGravidadeOcorr();
+		
 	}
 
-	public Collection<Word> getWords() {
-		return words;
-	}
-
-	public void setWords(Collection<Word> words) {
-		this.words = words;
-	}
-	
 	public boolean obterAcaoPolicial(String acao){
 		return acao.equalsIgnoreCase("foi") ||
 				acao.equalsIgnoreCase("auxili") ||
@@ -180,6 +159,10 @@ public class OcorrenciasPoliciais {
 		acao.equalsIgnoreCase("bar") ||
 		acao.equalsIgnoreCase("loj");
 	}
+	
+	private void definirGravidadeOcorr(){
+		
+	}
 
 	public String[] getAcao() {
 		return acao;
@@ -187,6 +170,38 @@ public class OcorrenciasPoliciais {
 
 	public PeriodoOcorrencia getPeriodo() {
 		return periodo;
+	}
+
+	public GravidadeOcorr getGravidadeOcorr() {
+		return gravidadeOcorr;
+	}
+
+	public void setGravidadeOcorr(GravidadeOcorr gravidadeOcorr) {
+		this.gravidadeOcorr = gravidadeOcorr;
+	}
+	
+	public Collection<Word> getWords() {
+		return words;
+	}
+
+	public void setWords(Collection<Word> words) {
+		this.words = words;
+	}
+	
+	public String getDsFato() {
+		return dsFato;
+	}
+
+	public String getDsBairro() {
+		return dsBairro;
+	}
+
+	public String dsDtOcorrencia() {
+		return dsDtOcorrencia;
+	}
+
+	public String getDsHorario() {
+		return dsHorario;
 	}
 
 	
