@@ -111,7 +111,6 @@ public class OcorrenciasPoliciais {
 		}
 		
 		definirGravidadeOcorr();
-		
 	}
 
 	public boolean obterAcaoPolicial(String acao){
@@ -161,7 +160,48 @@ public class OcorrenciasPoliciais {
 	}
 	
 	private void definirGravidadeOcorr(){
+		if	((!acao[0].equalsIgnoreCase("nao-identifi")) &&
+				(!acao[1].equalsIgnoreCase("nao-identifi"))){
+			
+			if	(acao[0].equalsIgnoreCase("atend") || acao[0].equalsIgnoreCase("prend") || 
+				acao[0].equalsIgnoreCase("apreend") || acao[0].equalsIgnoreCase("foi")) {
+				definirGravidadeOcorr2();
+			}else{
+				gravidadeOcorr = GravidadeOcorr.BAIXA;
+			}
+			
+		}
+	}
+	
+	private void definirGravidadeOcorr2(){
+		if	(acao[1].equalsIgnoreCase("homicidi") || acao[1].equalsIgnoreCase("agred")){
+			gravidadeOcorr = GravidadeOcorr.ALTA;
+			return;
+		}
 		
+		if	(acao[1].equalsIgnoreCase("furt") || acao[1].equalsIgnoreCase("assalt") ||
+				acao[1].equalsIgnoreCase("roub") || acao[1].equalsIgnoreCase("arromb") ){
+			definirGravidadeOcorr3();
+			return;
+		}
+		
+		if (acao[0].equalsIgnoreCase("prend")){
+			gravidadeOcorr = GravidadeOcorr.MEDIA;
+			return;
+		}
+		
+		gravidadeOcorr =  GravidadeOcorr.BAIXA;
+		
+	}
+	
+	private void definirGravidadeOcorr3(){
+		if	(acao[2].equalsIgnoreCase("motociclet") || acao[2].equalsIgnoreCase("veicul") ||
+				acao[2].equalsIgnoreCase("carr") || acao[2].equalsIgnoreCase("mot") || 
+				acao[2].equalsIgnoreCase("caminha")){
+			gravidadeOcorr =  GravidadeOcorr.MEDIA;
+		}else{
+			gravidadeOcorr =  GravidadeOcorr.BAIXA;
+		}
 	}
 
 	public String[] getAcao() {
