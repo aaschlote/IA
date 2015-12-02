@@ -164,7 +164,8 @@ public class OcorrenciasPoliciais {
 				(!acao[1].equalsIgnoreCase("nao-identifi"))){
 			
 			if	(acao[0].equalsIgnoreCase("atend") || acao[0].equalsIgnoreCase("prend") || 
-				acao[0].equalsIgnoreCase("apreend") || acao[0].equalsIgnoreCase("foi")) {
+				acao[0].equalsIgnoreCase("apreend") || acao[0].equalsIgnoreCase("foi") ||  
+				acao[0].equalsIgnoreCase("efetu")) {
 				definirGravidadeOcorr2();
 			}else{
 				gravidadeOcorr = GravidadeOcorr.BAIXA;

@@ -16,5 +16,24 @@ public enum GravidadeOcorr {
 	public int getNivel() {
 		return nivel;
 	}
+	
+	 public String toString() {
+        switch (getNivel()) {
+        case 1:
+            return "BAIXA";
+            
+        case 2:
+            return "MEDIA";
+            
+        case 3:
+            return "ALTA";
+        
+        case 4:
+            return "INEXISTENTE";
+
+        default:
+            return "DESCONHECIDO";
+        }
+    }
 
 }
